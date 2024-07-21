@@ -33,3 +33,23 @@ Ready to transform your business with Fenix-Black? Visit our website or contact 
 ---
 
 Embrace the future of business process management with Fenix-Black, where sophisticated AI meets innovative business solutions.
+
+---
+## Current Infrastructure Diagram
+```mermaid
+graph TD
+    Dashboard[Dashboard] -->|API & Prisma| PostgresDB
+    Dashboard -->|WebSocket| Engine
+    Engine -->|SQLModel & Pydantic| PostgresDB
+    WhatsappServer[Whatsapp Server] -->|API| Engine
+    Dashboard -->|API| WhatsappServer
+    Dashboard -->|API| Webpage
+    Webpage[Webpage]
+
+    style Dashboard fill:#f9f,stroke:#333,stroke-width:2px;
+    style Engine fill:#f96,stroke:#333,stroke-width:2px;
+    style PostgresDB fill:#69f,stroke:#333,stroke-width:2px;
+    style WhatsappServer fill:#6f6,stroke:#333,stroke-width:2px;
+    style Webpage fill:#f99,stroke:#333,stroke-width:2px;
+
+```
