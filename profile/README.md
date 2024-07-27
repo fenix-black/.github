@@ -38,18 +38,40 @@ Embrace the future of business process management with Fenix-Black, where sophis
 ## Current Infrastructure Diagram
 ```mermaid
 graph TD
-    Dashboard[Dashboard] -->|API & Prisma| PostgresDB
+    subgraph Framer
+        Webpage[Webpage]
+    end
+
+    subgraph Fargate
+        Dashboard[Dashboard]
+        API_Strapi_Server[API Strapi Server]
+        Engine[Engine]
+        WhatsappServer[Whatsapp Server]
+    end
+
+    subgraph RDS
+        PostgresDB[(PostgresDB)]
+    end
+
+    Dashboard -->|API| PostgresDB
+    Dashboard -->|API| API_Strapi_Server
     Dashboard -->|WebSocket| Engine
     Engine -->|SQLModel & Pydantic| PostgresDB
-    WhatsappServer[Whatsapp Server] -->|API| Engine
-    Dashboard -->|API| WhatsappServer
-    Dashboard -->|API| Webpage
-    Webpage[Webpage]
+    WhatsappServer -->|API| Engine
+    Engine <-->|API| Twilio
+    Engine <-->|API| PineconeDB
+    Engine -->|API| Deepgram[Deepgram ASR]
+    Engine -->|API| ElevenLabs[ElevenLabs TTS]
+    API_Strapi_Server -->|API| PostgresDB
 
     style Dashboard fill:#f9f,stroke:#333,stroke-width:2px;
     style Engine fill:#f96,stroke:#333,stroke-width:2px;
     style PostgresDB fill:#69f,stroke:#333,stroke-width:2px;
     style WhatsappServer fill:#6f6,stroke:#333,stroke-width:2px;
     style Webpage fill:#f99,stroke:#333,stroke-width:2px;
-
+    style API_Strapi_Server fill:#ff9,stroke:#333,stroke-width:2px;
+    style Twilio fill:#f66,stroke:#333,stroke-width:2px;
+    style PineconeDB fill:#6ff,stroke:#333,stroke-width:2px;
+    style Deepgram fill:#9f9,stroke:#333,stroke-width:2px;
+    style ElevenLabs fill:#9ff,stroke:#333,stroke-width:2px;
 ```
