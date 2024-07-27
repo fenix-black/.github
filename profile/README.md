@@ -44,7 +44,7 @@ graph TD
 
     subgraph Fargate
         Dashboard[Dashboard]
-        API_Strapi_Server[API Strapi Server]
+        API_Strapi_Server[API CMS Server]
         Engine[Engine]
         WhatsappServer[Whatsapp Server]
     end
